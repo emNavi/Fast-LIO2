@@ -1,0 +1,23 @@
+<launch>
+
+  <arg name="drone_id" default="1" />
+  <arg name="i_am_master" default="false" />
+  <arg name="no_drift_flag" default="" />
+
+
+  <!-- <node pkg="rosmsg_tcp_bridge" name="drone_$(arg drone_id)_bridge_node" type="bridge_node" output="screen" launch-prefix="valgrind" > -->
+  <node pkg="rosmsg_tcp_bridge" name="drone_$(arg drone_id)_bridge_node" type="bridge_node" output="screen" >
+    <remap from="position_cmd" to="drone_$(arg drone_id)_planning/pos_cmd"/>
+    <remap from="planning/bspline" to="drone_$(arg drone_id)_planning/bspline"/>
+    <remap from="~my_odom" to="/quadrotor_control/odom$(arg no_drift_flag)"/>
+    <remap from="~gridmap" to="/drone_$(arg drone_id)_ego_planner_node/grid_map/occupancy_inflate"/>
+
+    <param name="broadcast_ip" value="10.42.0.255" type="string"/>
+    <param name="drone_id" value="$(arg drone_id)"/>
+    <param name="odom_max_freq" value="70"/>
+    <param name="is_master" value="$(arg i_am_master)"/>
+
+
+  </node>
+
+</launch>

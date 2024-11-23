@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>livox2pointcloud</name>
+  <version>0.0.0</version>
+  <description>The livox2pointcloud package</description>
+  <maintainer email="gjulian@uos.de">julian</maintainer>
+  <license>MIT</license>
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>livox_ros_driver2</build_depend>
+  <build_depend>roscpp</build_depend>
+  <build_depend>sensor_msgs</build_depend>
+  <build_export_depend>livox_ros_driver2</build_export_depend>
+  <build_export_depend>roscpp</build_export_depend>
+  <build_export_depend>sensor_msgs</build_export_depend>
+  <exec_depend>livox_ros_driver2</exec_depend>
+  <exec_depend>roscpp</exec_depend>
+  <exec_depend>sensor_msgs</exec_depend>
+</package>

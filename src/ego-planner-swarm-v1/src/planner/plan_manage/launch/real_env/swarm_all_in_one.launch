@@ -1,0 +1,52 @@
+<launch>
+    <!-- topic of your odometry such as VIO or LIO -->
+    <arg name="odom_topic" value="/Odometry"/>
+    <!-- <arg name="odom_topic" value="/quadrotor_control/odom"/> -->
+    <arg name="depth_camera_topic" value="/test_drone_detect/new_depth_image"/>
+    <arg name="drone_id" default="0" />
+
+    <!-- 1: use 2D Nav Goal to select goal  -->
+    <!-- 2: use global waypoints below  -->
+    <!-- 4: use REMOTE_TARGET  -->
+    <!-- 5: use REMOTE_START  -->
+    <arg name="flight_type" default="4" />
+
+  <include file="$(find ego_planner)/launch/param.xml">
+    <arg name="drone_id" value="$(arg drone_id)"/>
+    <arg name="odometry_topic" value="$(arg odom_topic)"/>
+    <!-- camera pose: transform of camera frame in the world frame -->
+    <!-- depth topic: depth image, 640x480 by default -->
+    <!-- don't set cloud_topic if you already set these ones! -->
+    <arg name="camera_pose_topic" value="pcl_render_node/camera_pose"/>
+    <arg name="depth_topic" value="$(arg depth_camera_topic)"/>
+    <!-- topic of point cloud measurement, such as from LIDAR  -->
+    <!-- don't set camera pose and depth, if you already set this one! -->
+    <arg name="cloud_topic" value="/livox/pointcloud2/"/>
+
+    <!-- 1: use 2D Nav Goal to select goal  -->
+    <!-- 2: use global waypoints below  -->
+    <!-- 4: use REMOTE_TARGET  -->
+    <!-- 5: use REMOTE_START  -->
+    <arg name="flight_type" value="$(arg flight_type)" />
+  </include>
+
+    <!-- trajectory server -->
+    <node pkg="ego_planner" name="drone_$(arg drone_id)_traj_server" type="traj_server" output="screen">
+        <remap from="position_cmd" to="drone_$(arg drone_id)_planning/pos_cmd"/>
+        <remap from="~planning/bspline" to="drone_$(arg drone_id)_planning/bspline"/>
+
+        <param name="traj_server/time_forward" value="1.0" type="double"/>
+    </node>
+
+    <node pkg="odom_visualization" name="drone_$(arg drone_id)_odom_visualization" type="odom_visualization" output="screen">
+        <remap from="~odom" to="$(arg odom_topic)"/>
+        <param name="color/a" value="1.0"/>    
+        <param name="color/r" value="0.0"/>        
+        <param name="color/g" value="0.0"/>        
+        <param name="color/b" value="0.0"/>       
+        <param name="covariance_scale" value="100.0"/>       
+        <param name="robot_scale" value="1.0"/>
+        <param name="tf45" value="false"/>
+        <param name="drone_id" value="drone_id"/>
+    </node>
+</launch>

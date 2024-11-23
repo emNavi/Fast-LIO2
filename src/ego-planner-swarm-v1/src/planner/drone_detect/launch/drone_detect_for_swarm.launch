@@ -1,0 +1,15 @@
+<launch>
+  <arg name="drone_id" default="1"/>
+  <arg name="odom_topic" default="/quadrotor_control/odom"/>
+
+  <!-- Launch ROS Package Template Node -->
+  <node pkg="drone_detect" type="drone_detect" name="test_drone_detect" output="screen">
+    <rosparam command="load" file="$(find global_interface)/config/ego_planner_swarm_v1/depth_camera.yaml" />
+    <rosparam command="load" file="$(find drone_detect)/config/default.yaml"/>
+    <param name="my_id"      value="$(arg drone_id)" />
+    <param name="debug_flag" value="true" />
+    <remap from="~odometry"   to="$(arg odom_topic)"/>
+    <remap from="~depth" to="/camera/depth/image_rect_raw"/>
+  </node>
+
+</launch>
