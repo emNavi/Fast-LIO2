@@ -24,8 +24,8 @@ color_table_len = color_table.shape[0]
 ##########################
 # User only consider this block
 ##########################
-
-data_dir = "/home/user/Documents/catkin2021/catkin_fastlio2/data/" # should end with / 
+# TODO(Derkai): 路径需要读取
+data_dir = "/home/tk/Fast-LIO2/data/" # should end with / 
 scan_idx_range_to_stack = [0, 200] # if you want a whole map, use [0, len(scan_files)]
 node_skip = 1
 

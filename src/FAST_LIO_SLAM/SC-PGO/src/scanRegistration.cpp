@@ -167,8 +167,19 @@ void laserCloudHandler(const sensor_msgs::PointCloud2ConstPtr &laserCloudMsg)
 
         float angle = atan(point.z / sqrt(point.x * point.x + point.y * point.y)) * 180 / M_PI;
         int scanID = 0;
-
-        if (LIDAR_TYPE == "VLP16" && N_SCANS == 16)
+        // TODO（Derkai）： 这里需要处理一下
+        std::cout << angle << std::endl;
+        if (LIDAR_TYPE == "MID360" && N_SCANS == 4)
+        {
+            scanID = int((angle + 57) / 2 + 0.5);
+            if (scanID > (N_SCANS - 1) || scanID < 0)
+            {
+                std::cout << "continuc" << std::endl;
+                count--;
+                continue;
+            }
+        }
+        else if (LIDAR_TYPE == "VLP16" && N_SCANS == 16)
         {
             scanID = int((angle + 15) / 2 + 0.5);
             if (scanID > (N_SCANS - 1) || scanID < 0)
@@ -477,19 +488,20 @@ int main(int argc, char **argv)
     ros::init(argc, argv, "scanRegistration");
     ros::NodeHandle nh;
 
-    nh.param<int>("scan_line", N_SCANS, 16);
-    nh.param<std::string>("lidar_type", LIDAR_TYPE, "KITTI");
+    nh.param<int>("scan_line", N_SCANS, 4);
+    nh.param<std::string>("lidar_type", LIDAR_TYPE, "MID360");
     nh.param<double>("minimum_range", MINIMUM_RANGE, 0.1);
 
     //printf("scan line number %d \n", N_SCANS);
 
-    if(N_SCANS != 16 && N_SCANS != 32 && N_SCANS != 64)
+    if(N_SCANS != 4 && N_SCANS != 16 && N_SCANS != 32 && N_SCANS != 64)
     {
-        //printf("only support velodyne with 16, 32 or 64 scan line!");
+        printf("only support velodyne with 16, 32 or 64 scan line!");
         return 0;
     }
 
-    ros::Subscriber subLaserCloud = nh.subscribe<sensor_msgs::PointCloud2>("/velodyne_points", 100, laserCloudHandler);
+    // TODO(Derkai): 这里应当使用话题映射而不是直接给一个话题
+    ros::Subscriber subLaserCloud = nh.subscribe<sensor_msgs::PointCloud2>("/cloud_registered", 100, laserCloudHandler);
 
     pubLaserCloud = nh.advertise<sensor_msgs::PointCloud2>("/velodyne_cloud_2", 100);
 

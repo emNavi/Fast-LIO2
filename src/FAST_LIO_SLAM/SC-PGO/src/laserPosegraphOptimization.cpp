@@ -771,8 +771,8 @@ int main(int argc, char **argv)
 {
 	ros::init(argc, argv, "laserPGO");
 	ros::NodeHandle nh;
-
-	nh.param<std::string>("save_directory", save_directory, "/"); // pose assignment every k m move 
+    // TODO(Derkai): 路径需要读取
+	nh.param<std::string>("save_directory", save_directory, "/home/tk/Fast-LIO2/"); // pose assignment every k m move 
     pgKITTIformat = save_directory + "optimized_poses.txt";
     odomKITTIformat = save_directory + "odom_poses.txt";
     pgTimeSaveStream = std::fstream(save_directory + "times.txt", std::fstream::out); 

@@ -1,7 +1,7 @@
 #!/bin/bash
 echo "[START] Ego_Planner_Swarm_V1 "
 
-# 通过本脚本文件路径来获取 x152b 项目文件根目录
+# 通过本脚本文件路径来获取项目文件根目录
 PROJECT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/../.." && pwd )"
 
 max_vel=1.0
