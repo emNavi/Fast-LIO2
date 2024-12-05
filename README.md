@@ -1,7 +1,8 @@
-# Fast-LIO2 + Ego-Planner
+# Fast-LIO2 + SC-A-LOAM + Ego-Planner
+### 使用Fast-LIO2 的激光惯性里程计，加入 SC-A-LOAM 实现回环闭合和位姿图优化，最后使用 ego-planner 作为规划器
+![result](./result.png)
 
-![mapping](./mapping.png)
-
+> This project is based on [FAST_LIO_SLAM](https://github.com/GDUT-Kyle/FAST_LIO_SLAM.git)、[livox2pointcloud](https://github.com/juliangaal/livox2pointcloud.git) and [ego-planner-swarm](https://github.com/ZJU-FAST-Lab/ego-planner-swarm.git). It has been modified and greatly improved by emNavi Technology.
 
 ## 实验配置
 - 激光雷达：Mid360
