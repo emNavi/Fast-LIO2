@@ -62,7 +62,7 @@ catkin_make -j1
 ## 使用
 Mid360激光雷达上电，插入Mid360激光雷达网口至电脑，[配置好 livox_ros_driver2 驱动包中的 IP 地址](https://github.com/Livox-SDK/livox_ros_driver2?tab=readme-ov-file#4-lidar-config)，确保雷达可使用
 ```bash 
-# 开启 Fast_LIO 算法
+# 开启 Fast_LIO2 算法
 bash ./run_fast_lio.sh 
 
 # 开启 Ego-Planner 算法（需要去预设规划航点）
