@@ -5,6 +5,7 @@
 > This project is based on [FAST_LIO_SLAM](https://github.com/GDUT-Kyle/FAST_LIO_SLAM.git)、[livox2pointcloud](https://github.com/juliangaal/livox2pointcloud.git) and [ego-planner-swarm](https://github.com/ZJU-FAST-Lab/ego-planner-swarm.git). It has been modified and greatly improved by emNavi Technology.
 
 ## 实验配置
+- 环境：ROS1 Noetic
 - 激光雷达：Mid360
 - IMU：Mid360自带的IMU
 - 驱动包：Livox SDK2
