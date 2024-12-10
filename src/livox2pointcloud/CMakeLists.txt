@@ -18,6 +18,7 @@ catkin_package(
 )
 
 add_executable(${PROJECT_NAME}_node src/livox2pointcloud.cpp)
+add_dependencies(${PROJECT_NAME}_node ${catkin_EXPORTED_TARGETS})
 target_include_directories(${PROJECT_NAME}_node PRIVATE ${catkin_INCLUDE_DIRS})
 target_compile_options(${PROJECT_NAME}_node PRIVATE -Wall)
 

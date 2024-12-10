@@ -49,14 +49,9 @@ sudo make install
 
 # 下载 & 编译项目
 git clone https://github.com/emNavi/Fast-LIO2.git
-cd src/livox_ros_driver2
-# (这一步可能有报错但是不用管)
-./build.sh ROS1
 
-# 然后回退到项目根目录
-catkin_make -j1
-# 编译的时候有一些问题，可能是因为自定义消息没有被先编译所以被错误的引用，导致编译失败，可以试试 -j1 或者不加，一直增量的编肯定能过
-
+cd Fast-LIO2
+catkin_make
 ```
 
 ## 使用
